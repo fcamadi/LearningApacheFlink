@@ -51,7 +51,9 @@ public class WordCount
         DataSet<Tuple2<String, Integer>> tokenized = filtered.map(new Tokenizer());
 
         // Group by the tuple field 0, and sum up tuple field 1
-        DataSet<Tuple2<String, Integer>> counts = tokenized.groupBy(new int[]{0}).sum(1);
+        //DataSet<Tuple2<String, Integer>> counts = tokenized.groupBy(new int[]{0}).sum(1);
+        DataSet<Tuple2<String, Integer>> counts = tokenized.groupBy(0).sum(1); // grouping by only one field
+                                                                                           // no need to use an array here
 
         // Emit result
         if (params.has("output")) {
